@@ -61,7 +61,7 @@ export const Header = (props: HeaderProps):JSX.Element  => {
             </Grid>
             <Grid item>
               <IconButton color="primary" sx={{ p: 0.5 }}>
-                <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
+                <Avatar src="/1.png" alt="My Avatar" />
               </IconButton>
             </Grid>
           </Grid>

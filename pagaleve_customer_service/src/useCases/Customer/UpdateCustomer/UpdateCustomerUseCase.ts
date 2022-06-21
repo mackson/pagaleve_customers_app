@@ -3,20 +3,15 @@ import { Customer } from "../../../entities/Customer";
 import { ICustomerRepository } from "../../../repositories/ICustomerRepository";
 import { ICustomerRequestDTO } from "../CustomerDTO";
 
-export class CreateCustomerUserCase{
+export class UpdateCustomerUserCase{
 
     constructor(
       private customerRepository: ICustomerRepository
     ){}
 
-    async execute (data: ICustomerRequestDTO){
-      const customerAlreadyExists = await this.customerRepository.findByDocument(data.document);
+    async execute (data: ICustomerRequestDTO, id: string){
 
-      if(customerAlreadyExists) {
-        throw new Error("Customer Already Exists")
-      }
-
-      const customer = new Customer(data)
+      const customer = new Customer(data);
 
       const errors = await validate(customer);
       if (errors.length > 0) {
@@ -24,7 +19,7 @@ export class CreateCustomerUserCase{
         throw new Error(`Validation failed! ${errorsMessages}`)
       }
 
-      await this.customerRepository.save(customer);
+      await this.customerRepository.update(customer, id);
 
     }
 }

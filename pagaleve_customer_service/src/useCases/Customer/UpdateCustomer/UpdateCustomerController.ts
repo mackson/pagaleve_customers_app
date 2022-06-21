@@ -1,27 +1,28 @@
 import { Request, Response } from "express";
-import { CreateCustomerUserCase } from "./CreateCustomerUseCase";
+import { UpdateCustomerUserCase } from "./UpdateCustomerUseCase";
 
-export class CreateCustomerController{
+export class UpdateCustomerController{
   constructor(
-    private createCustomerUserCase: CreateCustomerUserCase
+    private updateCustomerUserCase: UpdateCustomerUserCase
   ){}
 
   async handle(request: Request, response: Response): Promise<Response>{
-    const { 
-      name, 
-      document, 
-      category, 
-      wallet 
+    const {
+      id,
+      name,
+      document,
+      category,
+      wallet
     } = request.body.data;
 
     try{
-      await this.createCustomerUserCase.execute({
+      await this.updateCustomerUserCase.execute({
         name,
         document,
         category,
         wallet,
-      });
-      return response.json({message: 'created'});
+      }, id);
+      return response.json({message: 'updated'});
     }catch(error){
       return response.json({
         error: error.message || 'Unexpected error',

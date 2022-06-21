@@ -28,16 +28,14 @@ export class Customer {
   public document: string;
 
   @Column()
-  @IsNotEmpty({message:'Customer type is required'})
-  public type: string;
+  @IsNotEmpty({message:'Customer category is required'})
+  public category: string;
 
   @Column()
   @IsNotEmpty({message:'Wallet value is required'})
   public wallet: number;
 
   constructor(props: Omit<Customer, 'id'>, id?: string){
-    // Assign props for all object attributes
     Object.assign(this, props);
-   
   }
 }

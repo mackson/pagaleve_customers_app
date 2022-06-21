@@ -2,12 +2,12 @@ import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Box from '@mui/material/Box';
 import { Header } from 'shared/components/Organisms/Header';
-import { Main } from 'shared/components/Organisms/Main';
+import { CustomerContent } from 'shared/components/Organisms/CustomerContent';
 import { Sidebar } from 'shared/components/Organisms/Sidebar';
 import { Footer } from 'shared/components/Molecules/Footer';
 import { useAppThemeContext } from 'shared/contexts';
 
-const Customers: React.FC = () => {
+export const Customers: React.FC = () => {
   const { theme } = useAppThemeContext();
   const [mobileOpen, setMobileOpen] = useState<boolean>(false);
   const smallScreenActive = useMediaQuery(theme.breakpoints.up('sm'));
@@ -18,8 +18,7 @@ const Customers: React.FC = () => {
   };
 
   return (
-    
-    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
+    <Box sx={{ display: 'flex', minHeight: '100vh', overflow: 'hidden', }}>
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -41,7 +40,7 @@ const Customers: React.FC = () => {
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         <Header onDrawerToggle={handleDrawerToggle} />
         <Box component="main" sx={{ flex: 1, py: 6, px: 4, bgcolor: theme.palette.background.default }}>
-          <Main />
+          <CustomerContent />
         </Box>
         <Box component="footer" sx={{ p: 2, bgcolor: theme.palette.background.default }}>
           <Footer />
@@ -50,5 +49,3 @@ const Customers: React.FC = () => {
     </Box>
   );
 };
-
-export default Customers;

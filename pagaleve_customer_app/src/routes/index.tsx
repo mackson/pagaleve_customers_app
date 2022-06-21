@@ -4,10 +4,9 @@ import {
   Route,
   Navigate
 } from 'react-router-dom';
-import Customers from 'pages/Customers';
+import {Customers} from 'pages/Customers';
 
-export default function App() {
-
+export const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
