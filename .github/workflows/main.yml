@@ -9,19 +9,28 @@ jobs:
   deploy-app:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: 📂 Deploy to Staging
-      uses: Techie-Pi/node-vps-deployment@main
-      with:
-        remote-path: "/var/www/html/pagaleve"
-        host: ${{ secrets.host }}
-        username: ${{ secrets.username }}
-        password: ${{ secrets.password }}
-        port: 22
-        automatic-pre-deploy: false
 
-    - name: 🔨 Build Project
-      run: |
-        cd /var/www/html/pagaleve
-        touch test.config
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: 📂 Copy repository contents via scp
+      uses: appleboy/scp-action@master
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PASSWORD: ${{ secrets.PASSWORD }}
+        PORT: 22
+      with:
+        source: "."
+        target: "/var/www/mywebsite"
+
+    - name: 🔨 Executing remote command
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PASSWORD: ${{ secrets.PASSWORD }}
+        PORT: 22
+        script: |
+            cd /var/www/html/pagaleve
+            touch test.config
