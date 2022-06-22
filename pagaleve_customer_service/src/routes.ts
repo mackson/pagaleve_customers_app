@@ -1,8 +1,8 @@
-import { Router } from "express";
-import { createCustomerController } from "./useCases/Customer/CreateCustomer";
-import { getCustomerController } from "./useCases/Customer/GetCustomer";
-import { updateCustomerController } from "./useCases/Customer/UpdateCustomer";
-import { deleteCustomerController } from "./useCases/Customer/DeleteCustomer";
+import { Router } from 'express';
+import { createCustomerController } from './useCases/Customer/CreateCustomer';
+import { getCustomerController } from './useCases/Customer/GetCustomer';
+import { updateCustomerController } from './useCases/Customer/UpdateCustomer';
+import { deleteCustomerController } from './useCases/Customer/DeleteCustomer';
 
 const router = Router();
 
@@ -26,4 +26,4 @@ router.delete('/customer/delete', (request, response) => {
   return deleteCustomerController.handle(request, response);
 });
 
-export { router }
+export { router };

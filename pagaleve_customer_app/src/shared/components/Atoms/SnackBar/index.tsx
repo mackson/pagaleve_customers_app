@@ -24,4 +24,4 @@ export const SnackBar = ({opened, handleClose, message, duration, alertLevel}:Pr
       </Alert>
     </Snackbar>
   );
-}
+};

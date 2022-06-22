@@ -58,16 +58,16 @@ export const CustomerContent = ():JSX.Element => {
 
   const CustomerSchema = Yup.object().shape({
     name: Yup.string()
-    .required('Name is required')
-    .max(255,'The Name should be at least 3 and no longer than 255 characters')
-    .min(3,'The Name should be at least 3 and no longer than 255 characters'),
+      .required('Name is required')
+      .max(255,'The Name should be at least 3 and no longer than 255 characters')
+      .min(3,'The Name should be at least 3 and no longer than 255 characters'),
     document: Yup.string()
-    .required('Document is required')
-    .max(18,'The document should be no longer than 18 characters'),
+      .required('Document is required')
+      .max(18,'The document should be no longer than 18 characters'),
     category: Yup.string()
-    .required('Customer Category is required'),
+      .required('Customer Category is required'),
     wallet: Yup.string()
-    .required('Wallet value is required')
+      .required('Wallet value is required')
   });
 
   const tableColumns: TabeleColumn[] = [
@@ -101,11 +101,11 @@ export const CustomerContent = ():JSX.Element => {
 
   const handleCloseMessage = ():void => {
     setMessageContent(null);
-  }
+  };
 
   const handleOpenDeleteDialog = (document: string):void => {
     setOpenDeleteDialog(true);
-    setDocumentToDelete(document)
+    setDocumentToDelete(document);
   };
 
   const handleCloseDeleteDialog = ():void => {
@@ -121,20 +121,20 @@ export const CustomerContent = ():JSX.Element => {
     setPage(0);
   };
 
-  const mountCustomerList = useCallback(async () => {
+  const mountCustomerList = useCallback(async ():Promise<void> => {
     const customers = await CustomersList();
     setCustomerList(customers);
   },[setCustomerList]);
 
-  const populateCustomerForm = async (document: string) => {
+  const populateCustomerForm = async (document: string):Promise<void> => {
     const customer = await CustomersGetOne(document);
     setCustomerFormPopulate(customer);
   };
 
-  const saveCustomer = async (data: Customer) => {
+  const saveCustomer = async (data: Customer):Promise<void> => {
     const customer = await CustomerSave(data);
     customer.error 
-    ? setMessageContent(
+      ? setMessageContent(
         <SnackBar 
           opened={true}
           handleClose={ () => handleCloseMessage()}
@@ -143,23 +143,23 @@ export const CustomerContent = ():JSX.Element => {
           alertLevel="error"
         />
       )
-    : setMessageContent(
+      : setMessageContent(
         <SnackBar
           opened={true}
           handleClose={ () => handleCloseMessage()}
-          message={"Customer Saved!"}
+          message={'Customer Saved!'}
           duration={2000}
           alertLevel="success"
         />
-      )
+      );
     
     mountCustomerList();
   };
 
-  const updateCustomer = async (data: Customer) => {
+  const updateCustomer = async (data: Customer):Promise<void> => {
     const customer = await CustomerEdit(data);
     customer.error 
-    ? setMessageContent(
+      ? setMessageContent(
         <SnackBar 
           opened={true}
           handleClose={ () => handleCloseMessage()}
@@ -168,23 +168,23 @@ export const CustomerContent = ():JSX.Element => {
           alertLevel="error"
         />
       )
-    : setMessageContent(
+      : setMessageContent(
         <SnackBar
           opened={true}
           handleClose={ () => handleCloseMessage()}
-          message={"Customer Updated!"}
+          message={'Customer Updated!'}
           duration={2000}
           alertLevel="info"
         />
-      )
+      );
     
     mountCustomerList();
   };
 
-  const deleteCustomer = async (document:string) => {
+  const deleteCustomer = async (document:string):Promise<void> => {
     const customer = await CustomerDelete(document);
     customer.error 
-    ? setMessageContent(
+      ? setMessageContent(
         <SnackBar 
           opened={true}
           handleClose={ () => handleCloseMessage()}
@@ -193,15 +193,15 @@ export const CustomerContent = ():JSX.Element => {
           alertLevel="error"
         />
       )
-    : setMessageContent(
+      : setMessageContent(
         <SnackBar
           opened={true}
           handleClose={ () => handleCloseMessage()}
-          message={"Customer Deleted!"}
+          message={'Customer Deleted!'}
           duration={2000}
           alertLevel="info"
         />
-      )
+      );
     
     mountCustomerList();
     setOpenDeleteDialog(false);
@@ -253,7 +253,7 @@ export const CustomerContent = ():JSX.Element => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {customerList
+              {customerList.length > 0 ? customerList
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: any) => {
                   return (
@@ -261,8 +261,8 @@ export const CustomerContent = ():JSX.Element => {
                       {tableColumns.map((column) => {
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            {column.id === "actions" 
-                            ? <Stack
+                            {column.id === 'actions'
+                              ? <Stack
                                 direction="row"
                                 alignItems="center"
                                 spacing={1}
@@ -278,13 +278,17 @@ export const CustomerContent = ():JSX.Element => {
                                   </IconButton>
                                 </Tooltip>
                               </Stack>
-                            : row[column.id]}
+                              : row[column.id]}
                           </TableCell>
                         );
                       })}
                     </TableRow>
                   );
-                })}
+                }) : <TableRow>
+                <TableCell colSpan={5}>
+                  <Typography color={'primary'} p={3} textAlign={'center'}>Customers not found!</Typography>
+                </TableCell>
+              </TableRow>}
             </TableBody>
           </Table>
         </TableContainer>
@@ -321,88 +325,88 @@ export const CustomerContent = ():JSX.Element => {
               customerFormPopulate.id ? updateCustomer(values) : saveCustomer(values);
             }}
           >
-          {({ values, errors, touched, handleChange }) => (
-            <Form>
-              <Grid 
-                container 
-                spacing={2}
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                p={1}
-              >
-                <Grid item xs={6}>
-                  <Field 
-                    color='secondary'
-                    label={'Name'}
-                    size="small"
-                    name="name"
-                    placeholder='Customer Name'
-                    fullWidth
-                    error={errors.name && touched.name ? true : false}
-                    helperText={errors.name && touched.name ? errors.name : null}
-                    as={TextField} 
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <Field 
-                    color='secondary'
-                    label={'Document'}
-                    size="small"
-                    name="document"
-                    placeholder='Customer Document'
-                    fullWidth
-                    error={errors.document && touched.document ? true : false}
-                    helperText={errors.document && touched.document ? errors.document : null}
-                    as={TextField} 
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <Field 
-                    color='secondary'
-                    label={'Category'}
-                    size="small"
-                    select
-                    name="category"
-                    placeholder='Customer Category'
-                    fullWidth
-                    onChange={handleChange('category')}
-                    value={values.category}
-                    error={errors.category && touched.category ? true : false}
-                    helperText={errors.category && touched.category ? errors.category : null}
-                    as={TextField} 
-                  >
-                    <MenuItem value={''}>Select a customer Category</MenuItem>
-                    <MenuItem value={"Pessoa Física"}>Pessoa Física</MenuItem>
-                    <MenuItem value={"Pessoa Jurídica"}>Pessoa Jurídica</MenuItem>
-                  </Field>
-                </Grid>
-                <Grid item xs={6}>
-                  <Field 
-                    color='secondary'
-                    label={'Wallet'}
-                    size="small"
-                    name="wallet"
-                    type="number"
-                    placeholder='Customer Wallet Value'
-                    fullWidth
-                    error={errors.wallet && touched.wallet ? true : false}
-                    helperText={errors.wallet && touched.wallet ? errors.wallet : null}
-                    as={TextField}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button 
-                    fullWidth 
-                    variant="contained" 
-                    color="success"
-                    type='submit'
-                  >
+            {({ values, errors, touched, handleChange }) => (
+              <Form>
+                <Grid 
+                  container 
+                  spacing={2}
+                  direction="row"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  p={1}
+                >
+                  <Grid item xs={6}>
+                    <Field 
+                      color='secondary'
+                      label={'Name'}
+                      size="small"
+                      name="name"
+                      placeholder='Customer Name'
+                      fullWidth
+                      error={errors.name && touched.name ? true : false}
+                      helperText={errors.name && touched.name ? errors.name : null}
+                      as={TextField} 
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Field 
+                      color='secondary'
+                      label={'Document'}
+                      size="small"
+                      name="document"
+                      placeholder='Customer Document'
+                      fullWidth
+                      error={errors.document && touched.document ? true : false}
+                      helperText={errors.document && touched.document ? errors.document : null}
+                      as={TextField} 
+                    />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Field 
+                      color='secondary'
+                      label={'Category'}
+                      size="small"
+                      select
+                      name="category"
+                      placeholder='Customer Category'
+                      fullWidth
+                      onChange={handleChange('category')}
+                      value={values.category}
+                      error={errors.category && touched.category ? true : false}
+                      helperText={errors.category && touched.category ? errors.category : null}
+                      as={TextField} 
+                    >
+                      <MenuItem value={''}>Select a customer Category</MenuItem>
+                      <MenuItem value={'Pessoa Física'}>Pessoa Física</MenuItem>
+                      <MenuItem value={'Pessoa Jurídica'}>Pessoa Jurídica</MenuItem>
+                    </Field>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Field 
+                      color='secondary'
+                      label={'Wallet'}
+                      size="small"
+                      name="wallet"
+                      type="number"
+                      placeholder='Customer Wallet Value'
+                      fullWidth
+                      error={errors.wallet && touched.wallet ? true : false}
+                      helperText={errors.wallet && touched.wallet ? errors.wallet : null}
+                      as={TextField}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button 
+                      fullWidth 
+                      variant="contained" 
+                      color="success"
+                      type='submit'
+                    >
                     Save
-                  </Button>
+                    </Button>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Form>
+              </Form>
             )}
           </Formik>
         </DialogContent>
@@ -425,4 +429,4 @@ export const CustomerContent = ():JSX.Element => {
       {messageContent}
     </Paper>
   );
-}
+};

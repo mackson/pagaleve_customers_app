@@ -18,12 +18,12 @@ interface HeaderProps {
 export const Header = (props: HeaderProps):JSX.Element  => {
   const { onDrawerToggle } = props;
   const { toggleTheme } = useAppThemeContext();
-  const [themeSelected, setThemeSelected] = useState<boolean>(false)
+  const [themeSelected, setThemeSelected] = useState<boolean>(false);
 
   const changeTheme = ():void => {
     toggleTheme();
     setThemeSelected(!themeSelected);
-  }
+  };
     
   return (
     <React.Fragment>
@@ -69,4 +69,4 @@ export const Header = (props: HeaderProps):JSX.Element  => {
       </AppBar>
     </React.Fragment>
   );
-}
+};

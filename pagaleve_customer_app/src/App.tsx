@@ -7,4 +7,4 @@ export const App: React.FC = () => {
       <AppRoutes />
     </AppThemeProvider>
   );
-}
+};

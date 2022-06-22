@@ -3,13 +3,13 @@ import {
   Column,
   ObjectIdColumn,
   ObjectID
-} from "typeorm";
+} from 'typeorm';
 
 import {
   IsNotEmpty,
   Length,
   MaxLength
-} from "class-validator";
+} from 'class-validator';
 
 @Entity('customers')
 export class Customer {
@@ -35,7 +35,7 @@ export class Customer {
   @IsNotEmpty({message:'Wallet value is required'})
   public wallet: number;
 
-  constructor(props: Omit<Customer, 'id'>, id?: string){
+  constructor(props: Omit<Customer, 'id'>){
     Object.assign(this, props);
   }
 }

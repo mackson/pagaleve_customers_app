@@ -7,7 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import PeopleIcon from '@mui/icons-material/People';
 import DnsRoundedIcon from '@mui/icons-material/DnsRounded';
-import PermMediaOutlinedIcon from '@mui/icons-material/PhotoSizeSelectActual';
+import AttachMoneySharp from '@mui/icons-material/AttachMoneySharp';
 import SettingsEthernetIcon from '@mui/icons-material/SettingsEthernet';
 import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponent';
 import { useAppThemeContext } from 'shared/contexts';
@@ -17,7 +17,7 @@ export const Sidebar = (props: DrawerProps):JSX.Element => {
 
   const { themeName } = useAppThemeContext();
 
-  const categories = [
+  const mainMenu = [
     {
       id: 'Portal',
       children: [
@@ -25,19 +25,21 @@ export const Sidebar = (props: DrawerProps):JSX.Element => {
           id: 'Customers',
           icon: <PeopleIcon />,
           active: true,
+          url: '/customers',
         },
-        { id: 'Operations', icon: <DnsRoundedIcon /> },
-        { id: 'Wallet', icon: <PermMediaOutlinedIcon /> },
-        { id: 'Migrations', icon: <SettingsEthernetIcon /> },
+        { id: 'Operations', icon: <DnsRoundedIcon />, url: '/customers', },
+        { id: 'Wallet', icon: <AttachMoneySharp />, url: '/customers', },
+        { id: 'Migrations', icon: <SettingsEthernetIcon />, url: '/customers', },
         {
           id: 'Settings',
           icon: <SettingsInputComponentIcon />,
+          url: '/customers',
         },
       ],
     },
   ];
 
-  const item = {
+  const menuItemStyle = {
     py: '10px',
     px: 3,
     color: themeName === 'light' ? 'rgba(63, 63, 63, 0.7)' : '#fff',
@@ -59,7 +61,7 @@ export const Sidebar = (props: DrawerProps):JSX.Element => {
     },
   };
 
-  const itemCategory = {
+  const menuItemCategoryStyle = {
     py: 4,
     px: 3,
     fontSize: 22,
@@ -68,15 +70,15 @@ export const Sidebar = (props: DrawerProps):JSX.Element => {
   return (
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
-        <ListItem sx={{ ...itemCategory}}>
+        <ListItem sx={{ ...menuItemCategoryStyle}}>
           {themeName === 'light' ? <img src="/pagaleve-logo.svg" alt="logo" /> : <img src="/pagaleve-logo-dark.svg" alt="logo" />}
         </ListItem>
        
-        {categories.map(({ id, children }) => (
+        {mainMenu.map(({ id, children }) => (
           <Box key={id} paddingRight={2} marginTop={1} >
-            {children.map(({ id: childId, icon, active }) => (
+            {children.map(({ id: childId, icon, active, url }) => (
               <ListItem disablePadding key={childId}>
-                <ListItemButton selected={active} sx={item}>
+                <ListItemButton selected={active} sx={menuItemStyle} href={url}>
                   <ListItemIcon>{icon}</ListItemIcon>
                   <ListItemText>{childId}</ListItemText>
                 </ListItemButton>
@@ -87,4 +89,4 @@ export const Sidebar = (props: DrawerProps):JSX.Element => {
       </List>
     </Drawer>
   );
-}
+};

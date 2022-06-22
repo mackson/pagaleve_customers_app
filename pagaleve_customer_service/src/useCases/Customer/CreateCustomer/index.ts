@@ -1,6 +1,6 @@
-import { MongoCustomerRepository } from "../../../Implementations/MongoCustomerRepository";
-import { CreateCustomerController } from "./CreateCustomerController";
-import { CreateCustomerUserCase } from "./CreateCustomerUseCase";
+import { MongoCustomerRepository } from '../../../implementations/MongoCustomerRepository';
+import { CreateCustomerController } from './CreateCustomerController';
+import { CreateCustomerUserCase } from './CreateCustomerUseCase';
 
 const mongoCustomerRepository = new MongoCustomerRepository();
 
@@ -12,4 +12,4 @@ const createCustomerController = new CreateCustomerController(
   createCustomerUserCase,
 );
 
-export { createCustomerUserCase, createCustomerController }
+export { createCustomerUserCase, createCustomerController };

@@ -11,4 +11,4 @@ export const Footer: React.FC = () => {
       {'Developed by Mackson Araujo'}
     </Typography>
   );
-}
+};

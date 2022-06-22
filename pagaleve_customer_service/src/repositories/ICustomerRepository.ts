@@ -1,5 +1,4 @@
-import { Customer } from "../entities/Customer";
-
+import { Customer } from '../entities/Customer';
 export interface ICustomerRepository {
   findByDocument(document: string): Promise<Customer>;
   list(): Promise<Customer>;

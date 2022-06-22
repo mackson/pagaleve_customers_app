@@ -1,6 +1,5 @@
-import { Request, Response } from "express";
-import { GetCustomerUserCase } from "./GetCustomerUseCase";
-
+import { Request, Response } from 'express';
+import { GetCustomerUserCase } from './GetCustomerUseCase';
 export class GetCustomerController{
   constructor(
       private getCustomerUserCase: GetCustomerUserCase

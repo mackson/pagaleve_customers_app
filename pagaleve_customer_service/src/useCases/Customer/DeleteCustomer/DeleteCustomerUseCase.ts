@@ -1,5 +1,4 @@
-import { ICustomerRepository } from "../../../repositories/ICustomerRepository";
-
+import { ICustomerRepository } from '../../../repositories/ICustomerRepository';
 export class DeleteCustomerUserCase{
   constructor(
     private customerRepository: ICustomerRepository

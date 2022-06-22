@@ -1,6 +1,6 @@
-import { MongoCustomerRepository } from "../../../Implementations/MongoCustomerRepository";
-import { GetCustomerController } from "./GetCustomerController";
-import { GetCustomerUserCase } from "./GetCustomerUseCase";
+import { MongoCustomerRepository } from '../../../implementations/MongoCustomerRepository';
+import { GetCustomerController } from './GetCustomerController';
+import { GetCustomerUserCase } from './GetCustomerUseCase';
 
 const mongoCustomerRepository = new MongoCustomerRepository();
 
@@ -12,4 +12,4 @@ const getCustomerController = new GetCustomerController(
   getCustomerUserCase,
 );
 
-export { getCustomerUserCase, getCustomerController }
+export { getCustomerUserCase, getCustomerController };

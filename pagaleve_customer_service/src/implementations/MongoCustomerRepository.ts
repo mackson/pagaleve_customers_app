@@ -1,6 +1,6 @@
-import { Customer } from "../entities/Customer";
-import { ICustomerRepository } from "../repositories/ICustomerRepository";
-import { MongoDBConnection } from "../external/MongoDBConnection";
+import { Customer } from '../entities/Customer';
+import { ICustomerRepository } from '../repositories/ICustomerRepository';
+import { MongoDBConnection } from '../external/MongoDBConnection';
 import { ObjectID } from 'mongodb';
 export class MongoCustomerRepository implements ICustomerRepository{
  

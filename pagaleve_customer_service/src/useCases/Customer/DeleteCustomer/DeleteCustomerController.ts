@@ -1,6 +1,5 @@
-import { Request, Response } from "express";
-import { DeleteCustomerUserCase } from "./DeleteCustomerUseCase";
-
+import { Request, Response } from 'express';
+import { DeleteCustomerUserCase } from './DeleteCustomerUseCase';
 export class DeleteCustomerController{
   constructor(
     private deleteCustomerUserCase: DeleteCustomerUserCase

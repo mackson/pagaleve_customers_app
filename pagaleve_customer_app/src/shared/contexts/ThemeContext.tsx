@@ -5,7 +5,7 @@ import {
   useMemo, 
   useContext,
   ReactNode,
-} from "react";
+} from 'react';
 import { ThemeProvider, CssBaseline, Box, Theme } from '@mui/material';
 import { DarkTheme, LightTheme } from 'shared/themes';
 
@@ -23,19 +23,19 @@ const ThemeContext = createContext({} as IThemeContextData);
 
 export const useAppThemeContext = () => {
   return useContext(ThemeContext);
-}
+};
 
 export const AppThemeProvider = ( { children }:AppThemeProviderProps): JSX.Element => {
   const [themeName, setThemeName] = useState<'light' | 'dark'>('light');
 
   const toggleTheme = useCallback(()=>{
-    setThemeName(oldThemeName => oldThemeName === 'light' ? 'dark' : 'light')
+    setThemeName(oldThemeName => oldThemeName === 'light' ? 'dark' : 'light');
   },[]);
 
   const theme = useMemo(():Theme =>{
     if(themeName === 'light') return LightTheme;
     return DarkTheme;
-  },[themeName])
+  },[themeName]);
 
   return (
     <ThemeContext.Provider value={ { themeName, toggleTheme, theme } }>
@@ -46,5 +46,5 @@ export const AppThemeProvider = ( { children }:AppThemeProviderProps): JSX.Eleme
         <CssBaseline />
       </ThemeProvider>
     </ThemeContext.Provider>
-  )
-}
+  );
+};
