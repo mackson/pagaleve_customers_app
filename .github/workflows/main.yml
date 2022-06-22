@@ -46,6 +46,6 @@ jobs:
         script: |
             cd /var/www/html/pagaleve/pagaleve_customer_service
             yarn --ignore-engines
-            yarn build --ignore-engines
+            yarn build
             yarn deploy
 
