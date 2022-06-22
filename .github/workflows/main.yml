@@ -18,18 +18,18 @@ jobs:
       env:
         HOST: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
-        PASSWORD: ${{ secrets.PASSWORD }}
+        KEY: ${{ secrets.SSHKEY }}
         PORT: 22
       with:
         source: "."
-        target: "/var/www/mywebsite"
+        target: "/var/www/html/pagaleve"
 
     - name: 🔨 Executing remote command
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
         USERNAME: ${{ secrets.USERNAME }}
-        PASSWORD: ${{ secrets.PASSWORD }}
+        KEY: ${{ secrets.SSHKEY }}
         PORT: 22
         script: |
             cd /var/www/html/pagaleve
