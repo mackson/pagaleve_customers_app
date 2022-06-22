@@ -24,7 +24,7 @@ jobs:
         source: "."
         target: "/var/www/html/pagaleve"
 
-    - name: 🔨 Executing remote command
+    - name: 🔨 Executing remote commands
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
