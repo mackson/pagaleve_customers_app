@@ -15,7 +15,7 @@ export class MongoDBConnection {
         host: 'localhost',
         port: 27017,
         database: 'pagaleve',
-        entities: ['src/entities/**/*.entity{.ts,.js}'],
+        entities: ['src/entities/**/*.js'],
         useUnifiedTopology: true
       });
 
