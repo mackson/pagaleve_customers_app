@@ -3,7 +3,7 @@ name: 🚀 Deploy App on push
 on:
   push:
     branches:
-      - 'main'
+      - 'dev'
 
 jobs:
   deploy-app:
@@ -27,7 +27,7 @@ jobs:
     - name: 📂 Deploy to Staging
       uses: SamKirkland/FTP-Deploy-Action@4.3.0
       with:
-        host: ${{ secrets.host }}
+        server: ${{ secrets.host }}
         username: ${{ secrets.username }}
         password: ${{ secrets.password }}
         server-dir: "/var/www/html/pagaleve/"
