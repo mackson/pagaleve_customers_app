@@ -9,7 +9,7 @@ export interface Customer {
 }
 
 const apiInstance = axios.create({
-  baseURL: 'http://localhost:3333',
+  baseURL: 'http://107.180.106.82:3333',
 });
 
 export const CustomersList = async () => {
