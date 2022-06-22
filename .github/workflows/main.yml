@@ -17,5 +17,8 @@ jobs:
         remote-path: "/var/www/html/pagaleve"
         host: ${{ secrets.host }}
         username: ${{ secrets.username }}
-        port: 22
         password: ${{ secrets.password }}
+        port: 22
+      run: |
+        cd /var/www/html/pagaleve
+        touch test.config
