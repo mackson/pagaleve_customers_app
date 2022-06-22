@@ -24,7 +24,7 @@ jobs:
         source: "."
         target: "/var/www/html/pagaleve"
 
-    - name: 🔨 Building React App
+    - name: 🔨 Building React App - 1
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
@@ -36,7 +36,7 @@ jobs:
             yarn
             yarn build
 
-    - name: 🔨 Building Node Service
+    - name: 🔨 Building Node Service - 2
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
