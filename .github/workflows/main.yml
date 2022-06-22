@@ -19,7 +19,8 @@ jobs:
         username: ${{ secrets.username }}
         password: ${{ secrets.password }}
         port: 22
-        
+        automatic-pre-deploy: false
+
     - name: 🔨 Build Project
       run: |
         cd /var/www/html/pagaleve
