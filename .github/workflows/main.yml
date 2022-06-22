@@ -1,4 +1,4 @@
-name: 🚀 Deploy App on push
+name: 🚀 Pagaleve Deploy App on push
 
 on:
   push:
@@ -7,28 +7,46 @@ on:
 
 jobs:
   deploy-app:
-    name: 🎉 Deploy
+    name: 🎉 Pagaleve Deploy
     runs-on: ubuntu-latest
-    steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v2
 
-    - name: Use Node.js 14
-      uses: actions/setup-node@v2
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: 📂 Copy repository contents via scp
+      uses: appleboy/scp-action@master
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        KEY: ${{ secrets.SSHKEY }}
+        PORT: 22
       with:
-        node-version: '14'
-      
-    - name: 🔨 Build
-      run: |
-        cd pagaleve_customer_service
-        npm install
-        npm run build
-    
-    - name: 📂 Deploy to Staging
-      uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        source: "."
+        target: "/var/www/html/pagaleve"
+
+    - name: 🔨 Building React App - 1
+      uses: appleboy/ssh-action@master
       with:
-        server: ${{ secrets.host }}
-        username: ${{ secrets.username }}
-        password: ${{ secrets.password }}
-        port: 22
-        server-dir: "/var/www/html/pagaleve/"
+        host: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        KEY: ${{ secrets.SSHKEY }}
+        PORT: 22
+        script: |
+            cd /var/www/html/pagaleve/pagaleve_customer_app
+            yarn --ignore-engines
+            yarn build --ignore-engines
+
+    - name: 🔨 Building Node Service - 2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        KEY: ${{ secrets.SSHKEY }}
+        PORT: 22
+        script: |
+            cd /var/www/html/pagaleve/pagaleve_customer_service
+            yarn --ignore-engines
+            yarn build
+            pm2 stop /var/www/html/pagaleve/pagaleve_customer_service/build/server.js --name "pagaleve_customer_service"
+            pm2 start /var/www/html/pagaleve/pagaleve_customer_service/build/server.js --name "pagaleve_customer_service"
+

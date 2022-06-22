@@ -1,4 +1,5 @@
 import { DataSource } from 'typeorm';
+import { Customer } from '../entities/Customer';
 export class MongoDBConnection {
 
   public async start(): Promise<DataSource> {
@@ -15,7 +16,7 @@ export class MongoDBConnection {
         host: 'localhost',
         port: 27017,
         database: 'pagaleve',
-        entities: ['src/entities/**/*.ts'],
+        entities: [Customer],
         useUnifiedTopology: true
       });
 
