@@ -47,5 +47,6 @@ jobs:
             cd /var/www/html/pagaleve/pagaleve_customer_service
             yarn --ignore-engines
             yarn build
-            yarn deploy
+            pm2 stop /var/www/html/pagaleve/pagaleve_customer_service/build/server.js --name "pagaleve_customer_service"
+            pm2 start /var/www/html/pagaleve/pagaleve_customer_service/build/server.js --name "pagaleve_customer_service"
 

@@ -6,8 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "ts-node-dev --transpile-only --respawn --ignore-watch node_modules src/server.ts",
-    "test": "jest --detectOpenHandles --watch",
-    "deploy": "pm2 restart build/server.js"
+    "test": "jest --detectOpenHandles --watch"
   },
   "dependencies": {
     "class-validator": "^0.13.2",
