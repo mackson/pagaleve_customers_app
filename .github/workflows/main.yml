@@ -23,9 +23,6 @@ jobs:
       with:
         source: "."
         target: "/var/www/html/pagaleve"
-        script: |
-            cd /var/www/html
-            sudo chmod 777 -R pagaleve
 
     - name: 🔨 Building React App - 1
       uses: appleboy/ssh-action@master
