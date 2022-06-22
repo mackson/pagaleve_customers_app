@@ -1,4 +1,4 @@
-name: 🚀 Deploy App on push
+name: 🚀 Pagaleve Deploy App on push
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy-app:
-    name: 🎉 Deploy
+    name: 🎉 Pagaleve Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -24,7 +24,7 @@ jobs:
         source: "."
         target: "/var/www/html/pagaleve"
 
-    - name: 🔨 Executing remote commands
+    - name: 🔨 Building React App
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
@@ -32,5 +32,20 @@ jobs:
         KEY: ${{ secrets.SSHKEY }}
         PORT: 22
         script: |
-            cd /var/www/html/pagaleve
-            touch test.config
+            cd /var/www/html/pagaleve/pagaleve_customer_app
+            yarn
+            yarn build
+
+    - name: 🔨 Building Node Service
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        KEY: ${{ secrets.SSHKEY }}
+        PORT: 22
+        script: |
+            cd /var/www/html/pagaleve/pagaleve_customer_service
+            yarn
+            yarn build
+            yarn deploy
+
