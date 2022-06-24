@@ -33,6 +33,7 @@ jobs:
         PORT: 22
         script: |
             cd /var/www/html/pagaleve/pagaleve_customer_app
+            yarn cache clean
             yarn --ignore-engines
             yarn build --ignore-engines
 
@@ -45,6 +46,7 @@ jobs:
         PORT: 22
         script: |
             cd /var/www/html/pagaleve/pagaleve_customer_service
+            yarn cache clean
             yarn --ignore-engines
             yarn build
             pm2 stop /var/www/html/pagaleve/pagaleve_customer_service/build/server.js --name "pagaleve_customer_service"
