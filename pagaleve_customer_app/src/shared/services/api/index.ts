@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export interface Customer {
+export interface ICustomer {
   id?: string,
   name: string;
   document: string;
@@ -10,15 +10,17 @@ export interface Customer {
 
 const apiInstance = axios.create({
   baseURL: 'http://107.180.106.82:3333',
+  //baseURL: 'http://localhost:3333',
 });
 
-export const CustomersList = async () => {
-  try{
-    const customersList = await apiInstance.get('/customer/list');
-    return customersList.data;
-  }catch(error){
-    return {error: error};
-  }
+export const CustomersList = (page:number, limit:number) => {
+  const customersList = apiInstance.get(`/customer/list/${page}/${limit}`);
+  return customersList;
+};
+
+export const CustomersGetAll = async() => {
+  const customersGetAll = await apiInstance.get('/customer/getall');
+  return customersGetAll.data;
 };
 
 export const CustomersGetOne = async (document:string) => {
@@ -30,7 +32,7 @@ export const CustomersGetOne = async (document:string) => {
   }
 };
 
-export const CustomerSave = async (data: Customer) => {
+export const CustomerSave = async (data: ICustomer) => {
   try{
     const customerSave = await apiInstance.post('/customer/create',{data});
     return customerSave.data;
@@ -39,7 +41,7 @@ export const CustomerSave = async (data: Customer) => {
   }
 };
 
-export const CustomerEdit = async (data: Customer) => {
+export const CustomerEdit = async (data: ICustomer) => {
   try{
     const customerEdit = await apiInstance.put('/customer/update',{data});
     return customerEdit.data;

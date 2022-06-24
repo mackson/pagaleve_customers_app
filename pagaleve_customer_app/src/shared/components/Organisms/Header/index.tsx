@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import SettingsIcon from '@mui/icons-material/Settings';
+import TungstenSharpIcon from '@mui/icons-material/TungstenSharp';
 import Toolbar from '@mui/material/Toolbar';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
@@ -48,7 +48,7 @@ export const Header = (props: HeaderProps):JSX.Element  => {
             <Grid item>
               <Tooltip title="Change Theme">
                 <IconButton color="primary" onClick={changeTheme}>
-                  <SettingsIcon />
+                  <TungstenSharpIcon />
                 </IconButton>
               </Tooltip>
             </Grid>

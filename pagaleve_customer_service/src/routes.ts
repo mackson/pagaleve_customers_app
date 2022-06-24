@@ -10,8 +10,12 @@ router.post('/customer/create', (request, response) => {
   return createCustomerController.handle(request, response);
 });
 
-router.get('/customer/list', (request, response) => {
+router.get('/customer/list/:page/:limit', (request, response) => {
   return getCustomerController.list(request, response);
+});
+
+router.get('/customer/getall', (request, response) => {
+  return getCustomerController.getAll(request, response);
 });
 
 router.get('/customer/getone/:document', (request, response) => {
