@@ -122,6 +122,7 @@ export const Customers = ():JSX.Element => {
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLSelectElement>):void => {
     setRowsPerPage(+event.target.value);
+    setPage(1);
   };
 
   const mountCustomerList = async() => {
