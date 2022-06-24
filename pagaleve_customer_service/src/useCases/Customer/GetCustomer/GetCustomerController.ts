@@ -7,8 +7,20 @@ export class GetCustomerController{
 
   async list(request: Request, response: Response): Promise<Response>{
     try{
-      const listCustomers = await this.getCustomerUserCase.executeList();
+      const { page, limit } = request.params;
+      const listCustomers = await this.getCustomerUserCase.executeList(Number(page), Number(limit));
       return response.json(listCustomers);
+    }catch(error){
+      return response.json({
+        error: error.message || 'Unexpected error',
+      });
+    }
+  }
+
+  async getAll(request: Request, response: Response): Promise<Response>{
+    try{
+      const getAllCustomers = await this.getCustomerUserCase.executeGetAll();
+      return response.json(getAllCustomers);
     }catch(error){
       return response.json({
         error: error.message || 'Unexpected error',

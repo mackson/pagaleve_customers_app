@@ -40,7 +40,7 @@ export const AppThemeProvider = ( { children }:AppThemeProviderProps): JSX.Eleme
   return (
     <ThemeContext.Provider value={ { themeName, toggleTheme, theme } }>
       <ThemeProvider theme={theme}>
-        <Box className="anim-el" width="100vw" height="100vh" bgcolor={theme.palette.background.default}>
+        <Box bgcolor={theme.palette.background.default}>
           {children}
         </Box>
         <CssBaseline />

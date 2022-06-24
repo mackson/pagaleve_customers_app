@@ -17,12 +17,28 @@ export class MongoCustomerRepository implements ICustomerRepository{
     return customer;
   }
 
-  async list(): Promise<Customer> {
+  async list(page:number, limit:number): Promise<Customer> {
     const manager = (await this.mongoDBConnection).manager;
 
-    const customers : Customer = await manager.getRepository(Customer).find();
+    const pagination = page - 1;
+
+    const customers : Customer = await manager.getRepository(Customer).find({
+      take: limit,
+      skip: limit * pagination,
+      order: {
+        _id: -1,
+      },
+    });
 
     return customers;
+  }
+
+  async getAll(): Promise<number> {
+    const manager = (await this.mongoDBConnection).manager;
+
+    const customers = await manager.getRepository(Customer).findAndCount();
+
+    return customers[1];
   }
 
   async save(customer: Customer): Promise<void> {
