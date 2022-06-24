@@ -5,9 +5,18 @@ export class GetCustomerUserCase{
     private customerRepository: ICustomerRepository
   ){}
 
-  async executeList (){
+  async executeList (page:number, limit:number){
     try{
-      const listAllCustomers = await this.customerRepository.list();
+      const listAllCustomers = await this.customerRepository.list(page, limit);
+      return listAllCustomers;
+    }catch(error){
+      throw new Error('Customers not found '+error);
+    }
+  }
+
+  async executeGetAll (){
+    try{
+      const listAllCustomers = await this.customerRepository.getAll();
       return listAllCustomers;
     }catch(error){
       throw new Error('Customers not found '+error);

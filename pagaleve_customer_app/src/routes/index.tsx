@@ -4,7 +4,7 @@ import {
   Route,
   Navigate
 } from 'react-router-dom';
-import {Customers} from 'pages/Customers';
+import { Customers } from 'pages/Customers';
 
 export const AppRoutes = () => {
   return (
