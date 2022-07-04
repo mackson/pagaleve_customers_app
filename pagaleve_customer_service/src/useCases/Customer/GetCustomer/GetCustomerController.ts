@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { GetCustomerUserCase } from './GetCustomerUseCase';
+import { GetCustomerUseCase } from './GetCustomerUseCase';
 export class GetCustomerController{
   constructor(
-      private getCustomerUserCase: GetCustomerUserCase
+      private getCustomerUserCase: GetCustomerUseCase
   ){}
 
   async list(request: Request, response: Response): Promise<Response>{
@@ -17,10 +17,10 @@ export class GetCustomerController{
     }
   }
 
-  async getAll(request: Request, response: Response): Promise<Response>{
+  async countAll(request: Request, response: Response): Promise<Response>{
     try{
-      const getAllCustomers = await this.getCustomerUserCase.executeGetAll();
-      return response.json(getAllCustomers);
+      const countCustomers = await this.getCustomerUserCase.executeCountAll();
+      return response.json(countCustomers);
     }catch(error){
       return response.json({
         error: error.message || 'Unexpected error',

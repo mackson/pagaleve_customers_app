@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { UpdateCustomerUserCase } from './UpdateCustomerUseCase';
+import { UpdateCustomerUseCase } from './UpdateCustomerUseCase';
 export class UpdateCustomerController{
   constructor(
-    private updateCustomerUserCase: UpdateCustomerUserCase
+    private updateCustomerUserCase: UpdateCustomerUseCase
   ){}
 
   async handle(request: Request, response: Response): Promise<Response>{

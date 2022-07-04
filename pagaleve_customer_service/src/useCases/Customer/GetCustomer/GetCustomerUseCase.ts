@@ -1,5 +1,5 @@
 import { ICustomerRepository } from '../../../repositories/ICustomerRepository';
-export class GetCustomerUserCase{
+export class GetCustomerUseCase{
 
   constructor(
     private customerRepository: ICustomerRepository
@@ -14,10 +14,10 @@ export class GetCustomerUserCase{
     }
   }
 
-  async executeGetAll (){
+  async executeCountAll (){
     try{
-      const listAllCustomers = await this.customerRepository.getAll();
-      return listAllCustomers;
+      const countCustomers = await this.customerRepository.getAll();
+      return countCustomers;
     }catch(error){
       throw new Error('Customers not found '+error);
     }

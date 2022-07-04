@@ -10,7 +10,7 @@ export interface ICustomer {
 
 const apiInstance = axios.create({
   baseURL: 'http://107.180.106.82:3333',
-  //baseURL: 'http://localhost:3333',
+  // baseURL: 'http://localhost:3333',
 });
 
 export const CustomersList = (page:number, limit:number) => {
@@ -18,9 +18,9 @@ export const CustomersList = (page:number, limit:number) => {
   return customersList;
 };
 
-export const CustomersGetAll = async() => {
-  const customersGetAll = await apiInstance.get('/customer/getall');
-  return customersGetAll.data;
+export const CustomersCountAll = async() => {
+  const customersCountAll = await apiInstance.get('/customer/countall');
+  return customersCountAll.data;
 };
 
 export const CustomersGetOne = async (document:string) => {

@@ -2,7 +2,7 @@ import { validate } from 'class-validator';
 import { Customer } from '../../../entities/Customer';
 import { ICustomerRepository } from '../../../repositories/ICustomerRepository';
 import { ICustomerRequestDTO } from '../CustomerDTO';
-export class CreateCustomerUserCase{
+export class CreateCustomerUseCase{
 
   constructor(
     private customerRepository: ICustomerRepository

@@ -1,15 +1,15 @@
 import { MongoCustomerRepository } from '../../../implementations/MongoCustomerRepository';
 import { GetCustomerController } from './GetCustomerController';
-import { GetCustomerUserCase } from './GetCustomerUseCase';
+import { GetCustomerUseCase } from './GetCustomerUseCase';
 
 const mongoCustomerRepository = new MongoCustomerRepository();
 
-const getCustomerUserCase = new GetCustomerUserCase(
+const getCustomerUseCase = new GetCustomerUseCase(
   mongoCustomerRepository,
 );
 
 const getCustomerController = new GetCustomerController(
-  getCustomerUserCase,
+  getCustomerUseCase,
 );
 
-export { getCustomerUserCase, getCustomerController };
+export { getCustomerUseCase, getCustomerController };

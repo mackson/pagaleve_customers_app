@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { CreateCustomerUserCase } from './CreateCustomerUseCase';
+import { CreateCustomerUseCase } from './CreateCustomerUseCase';
 export class CreateCustomerController{
   constructor(
-    private createCustomerUserCase: CreateCustomerUserCase
+    private createCustomerUserCase: CreateCustomerUseCase
   ){}
 
   async handle(request: Request, response: Response): Promise<Response>{
