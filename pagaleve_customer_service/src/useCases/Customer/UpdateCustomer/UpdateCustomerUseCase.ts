@@ -2,7 +2,7 @@ import { validate } from 'class-validator';
 import { Customer } from '../../../entities/Customer';
 import { ICustomerRepository } from '../../../repositories/ICustomerRepository';
 import { ICustomerRequestDTO } from '../CustomerDTO';
-export class UpdateCustomerUserCase{
+export class UpdateCustomerUseCase{
 
   constructor(
     private customerRepository: ICustomerRepository
@@ -19,6 +19,8 @@ export class UpdateCustomerUserCase{
     }
 
     await this.customerRepository.update(customer, id);
+
+    return 'done';
 
   }
 }

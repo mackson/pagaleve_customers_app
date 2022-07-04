@@ -1,10 +1,15 @@
 import { ICustomerRepository } from '../../../repositories/ICustomerRepository';
-export class DeleteCustomerUserCase{
+export class DeleteCustomerUseCase{
   constructor(
     private customerRepository: ICustomerRepository
   ){}
 
   async execute (document: string){
-    await this.customerRepository.delete(document);
+    try{
+      await this.customerRepository.delete(document);
+      return 'done';
+    }catch(error){
+      return error;
+    }
   }
 }

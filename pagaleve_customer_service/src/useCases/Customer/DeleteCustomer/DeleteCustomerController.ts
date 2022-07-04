@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { DeleteCustomerUserCase } from './DeleteCustomerUseCase';
+import { DeleteCustomerUseCase } from './DeleteCustomerUseCase';
 export class DeleteCustomerController{
   constructor(
-    private deleteCustomerUserCase: DeleteCustomerUserCase
+    private deleteCustomerUserCase: DeleteCustomerUseCase
   ){}
 
   async handle(request: Request, response: Response): Promise<Response>{

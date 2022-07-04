@@ -14,8 +14,8 @@ router.get('/customer/list/:page/:limit', (request, response) => {
   return getCustomerController.list(request, response);
 });
 
-router.get('/customer/getall', (request, response) => {
-  return getCustomerController.getAll(request, response);
+router.get('/customer/countall', (request, response) => {
+  return getCustomerController.countAll(request, response);
 });
 
 router.get('/customer/getone/:document', (request, response) => {

@@ -3,7 +3,7 @@ name: 🚀 Pagaleve Deploy App on push
 on:
   push:
     branches:
-      - 'hml'
+      - 'main'
 
 jobs:
   deploy-app:

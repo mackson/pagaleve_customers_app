@@ -1,15 +1,15 @@
 import { MongoCustomerRepository } from '../../../implementations/MongoCustomerRepository';
 import { UpdateCustomerController } from './UpdateCustomerController';
-import { UpdateCustomerUserCase } from './UpdateCustomerUseCase';
+import { UpdateCustomerUseCase } from './UpdateCustomerUseCase';
 
 const mongoCustomerRepository = new MongoCustomerRepository();
 
-const updateCustomerUserCase = new UpdateCustomerUserCase(
+const updateCustomerUseCase = new UpdateCustomerUseCase(
   mongoCustomerRepository,
 );
 
 const updateCustomerController = new UpdateCustomerController(
-  updateCustomerUserCase,
+  updateCustomerUseCase,
 );
 
-export { updateCustomerUserCase, updateCustomerController };
+export { updateCustomerUseCase, updateCustomerController };

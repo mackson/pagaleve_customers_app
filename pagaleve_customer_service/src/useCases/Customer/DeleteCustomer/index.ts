@@ -1,15 +1,15 @@
 import { MongoCustomerRepository } from '../../../implementations/MongoCustomerRepository';
 import { DeleteCustomerController } from './DeleteCustomerController';
-import { DeleteCustomerUserCase } from './DeleteCustomerUseCase';
+import { DeleteCustomerUseCase } from './DeleteCustomerUseCase';
 
 const mongoCustomerRepository = new MongoCustomerRepository();
 
-const deleteCustomerUserCase = new DeleteCustomerUserCase(
+const deleteCustomerUseCase = new DeleteCustomerUseCase(
   mongoCustomerRepository,
 );
 
 const deleteCustomerController = new DeleteCustomerController(
-  deleteCustomerUserCase,
+  deleteCustomerUseCase,
 );
 
-export { deleteCustomerUserCase, deleteCustomerController };
+export { deleteCustomerUseCase, deleteCustomerController };

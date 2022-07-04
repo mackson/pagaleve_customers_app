@@ -30,7 +30,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Tooltip from '@mui/material/Tooltip';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { ICustomer, CustomersList, CustomersGetAll, CustomersGetOne, CustomerSave, CustomerEdit, CustomerDelete } from 'shared/services/api';
+import { ICustomer, CustomersList, CustomersCountAll, CustomersGetOne, CustomerSave, CustomerEdit, CustomerDelete } from 'shared/services/api';
 import { SnackBar } from 'shared/components/Atoms/SnackBar';
 
 interface TabeleColumn {
@@ -122,12 +122,13 @@ export const Customers = ():JSX.Element => {
 
   const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLSelectElement>):void => {
     setRowsPerPage(+event.target.value);
+    setPage(1);
   };
 
   const mountCustomerList = async() => {
     setIsLoading(true);
-    const count = await CustomersGetAll();
-    setCountCustomers(count);
+    const countAllCustomers = await CustomersCountAll();
+    setCountCustomers(countAllCustomers);
 
     CustomersList(page, rowsPerPage).then((result)=>{
       setIsLoading(false);
